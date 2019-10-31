@@ -12,12 +12,12 @@ describe('simple numeric validation', () => {
 });
 
 describe('validator module performs basic validation of', () => {
-  let str = 'yes';
-  let num = 1;
-  let arr = ['a'];
-  let obj = {x:'y'};
-  let bool = false;
-  let func = () => {};
+  const str = 'yes';
+  const num = 1;
+  const arr = ['a'];
+  const obj = { x: 'y' };
+  const bool = false;
+  const func = () => {};
 
   it('strings', () => {
     expect(validator.isString(str)).toBeTruthy();
@@ -75,9 +75,9 @@ describe('validator module performs basic validation of', () => {
 });
 
 describe('#isNumberValid', () => {
-  let one = 1;
-  let negOne = -1;
-  let zero = 0;
+  const one = 1;
+  const negOne = -1;
+  const zero = 0;
 
   test('rule: positive', () => {
     expect(validator.isNumberValid(one, 'positive')).toEqual(true);
@@ -103,42 +103,40 @@ describe('#isNumberValid', () => {
 
   test('unexpected rule', () => {
     expect(validator.isNumberValid(zero, 'unknown rule')).toEqual(false);
-  })
+  });
 });
 
 // Jumping off the code review example...
 describe('#isObjectValid', () => {
   const schema = {
     fields: {
-      id: {type: 'string'},
-      age: {type: 'number'},
-      favoriteToys: {type: 'object'}
-    }
+      id: { type: 'string' },
+      age: { type: 'number' },
+      favoriteToys: { type: 'object' },
+    },
   };
 
   test('expected case', () => {
-    expect(validator.isObjectValid({id: 'kali', age: 2, favoriteToys: {}}, schema)).toEqual(true);
+    expect(validator.isObjectValid({ id: 'kali', age: 2, favoriteToys: {} }, schema)).toEqual(true);
   });
 
   test('incorrect parameter types', () => {
     expect(validator.isObjectValid([], schema)).toEqual(false);
-    expect(validator.isObjectValid({id: 'kali', age: 2, favoriteToys: []}, [])).toEqual(false);
+    expect(validator.isObjectValid({ id: 'kali', age: 2, favoriteToys: [] }, [])).toEqual(false);
   });
 
   test('missing fields', () => {
-    expect(validator.isObjectValid({age: 2, favoriteToys: {}}, schema)).toEqual(false);
-    expect(validator.isObjectValid({id: 'kali', favoriteToys: {}}, schema)).toEqual(false);
-    expect(validator.isObjectValid({id: 'kali', age: 2}, schema)).toEqual(false);
+    expect(validator.isObjectValid({ age: 2, favoriteToys: {} }, schema)).toEqual(false);
+    expect(validator.isObjectValid({ id: 'kali', favoriteToys: {} }, schema)).toEqual(false);
+    expect(validator.isObjectValid({ id: 'kali', age: 2 }, schema)).toEqual(false);
   });
 
   test('incorrect field types', () => {
-    expect(validator.isObjectValid({id: 1, age: 2, favoriteToys: {}}, schema)).toEqual(false);
-    expect(validator.isObjectValid({id: 'kali', age: '2', favoriteToys: {}}, schema)).toEqual(false);
-    expect(validator.isObjectValid({id: 'kali', age: 2, favoriteToys: []}, schema)).toEqual(false);
+    expect(validator.isObjectValid({ id: 1, age: 2, favoriteToys: {} }, schema)).toEqual(false);
+    expect(validator.isObjectValid({ id: 'kali', age: '2', favoriteToys: {} }, schema)).toEqual(false);
+    expect(validator.isObjectValid({ id: 'kali', age: 2, favoriteToys: [] }, schema)).toEqual(false);
   });
 });
-
-
 
 /*
 
